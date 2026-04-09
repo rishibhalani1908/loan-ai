@@ -1,0 +1,77 @@
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #a18cd1, #667eea);
+    background-size: 400% 400%;
+    animation: gradientBG 10s ease infinite;
+    color: white;
+}
+
+/* Background animation */
+@keyframes gradientBG {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+
+/* Glass box */
+.login-box, .container {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    padding: 35px;
+    width: 320px;
+    margin: 100px auto;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+/* Headings */
+h1, h2 {
+    margin-bottom: 20px;
+}
+
+/* Inputs */
+input {
+    width: 90%;
+    padding: 12px;
+    margin: 10px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+}
+
+/* Buttons */
+button {
+    padding: 12px 20px;
+    margin: 10px;
+    background: linear-gradient(45deg, #ff6ec4, #7873f5);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Result box */
+#result {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+/* Status colors */
+.approved {
+    color: #00ff9d;
+    font-weight: bold;
+}
+
+.rejected {
+    color: #ff4d4d;
+    font-weight: bold;
+}

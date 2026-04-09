@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Loan History</title>
+
+<style>
+body {
+    margin:0;
+    font-family:'Poppins',sans-serif;
+    background: linear-gradient(135deg,#667eea,#764ba2);
+    color:white;
+}
+
+/* Container */
+.container {
+    max-width:900px;
+    margin:auto;
+    padding:20px;
+}
+
+/* Title */
+h1 {
+    text-align:center;
+    margin-bottom:20px;
+}
+
+/* Glass card */
+.card {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 8px 32px rgba(0,0,0,0.3);
+}
+
+/* Table */
+table {
+    width:100%;
+    border-collapse: collapse;
+    margin-top:10px;
+}
+
+th, td {
+    padding:12px;
+    text-align:center;
+}
+
+th {
+    background: rgba(0,0,0,0.4);
+}
+
+/* Row hover */
+tr:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+/* Status colors */
+.approved {
+    color:#00ff9d;
+    font-weight:bold;
+}
+
+.rejected {
+    color:#ff4d4d;
+    font-weight:bold;
+}
+
+/* Button */
+button {
+    margin-top:20px;
+    padding:10px 20px;
+    border:none;
+    border-radius:8px;
+    background: linear-gradient(45deg,#ff6ec4,#7873f5);
+    color:white;
+    cursor:pointer;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📊 Loan History</h1>
+
+<div class="card">
+
+<table>
+<tr>
+    <th>Age</th>
+    <th>Income</th>
+    <th>Credit</th>
+    <th>Loan</th>
+    <th>Status</th>
+</tr>
+
+{% for r in data %}
+<tr>
+    <td>{{r[2]}}</td>
+    <td>₹{{r[3]}}</td>
+    <td>{{r[4]}}</td>
+    <td>₹{{r[5]}}</td>
+
+    {% if r[6] == "Approved" %}
+        <td class="approved">✔ Approved</td>
+    {% else %}
+        <td class="rejected">✖ Rejected</td>
+    {% endif %}
+</tr>
+{% endfor %}
+
+</table>
+
+</div>
+
+<a href="/dashboard">
+<button>⬅ Back to Dashboard</button>
+</a>
+
+</div>
+
+</body>
+</html>

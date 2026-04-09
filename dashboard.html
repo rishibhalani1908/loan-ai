@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dashboard</title>
+
+<style>
+body {
+    margin:0;
+    font-family:Arial;
+    background: linear-gradient(135deg,#667eea,#764ba2);
+    color:white;
+}
+
+.container {
+    max-width:900px;
+    margin:auto;
+    padding:20px;
+}
+
+.card {
+    background: rgba(255,255,255,0.2);
+    padding:20px;
+    border-radius:15px;
+    margin:20px 0;
+    backdrop-filter: blur(10px);
+    box-shadow:0 8px 32px rgba(0,0,0,0.3);
+}
+
+input {
+    padding:10px;
+    margin:10px;
+    width:20%;
+    border:none;
+    border-radius:5px;
+}
+
+button {
+    padding:10px 20px;
+    background:#00c9ff;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    color:white;
+}
+
+button:hover {
+    background:#92fe9d;
+    color:black;
+}
+
+.approved {color:#00ff9d;}
+.rejected {color:#ff4d4d;}
+
+.meter {
+    height:15px;
+    background:#ddd;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.fill {
+    height:100%;
+    background:linear-gradient(90deg,#00ff9d,#00c9ff);
+    width:0%;
+    transition:1s;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>💰 AI Loan Dashboard</h1>
+
+<div class="card">
+<input id="age" placeholder="Age">
+<input id="income" placeholder="Income">
+<input id="credit" placeholder="Credit">
+<input id="loan" placeholder="Loan">
+
+<br>
+<button onclick="check()">Check Eligibility</button>
+<a href="/history"><button>History</button></a>
+<a href="/logout"><button>Logout</button></a>
+</div>
+
+<div class="card" id="result" style="display:none;">
+<h2 id="status"></h2>
+<p id="statement"></p>
+
+<div class="meter">
+<div class="fill" id="bar"></div>
+</div>
+
+<ul id="reasons"></ul>
+<ul id="suggestions"></ul>
+
+</div>
+
+</div>
+
+<script>
+function check(){
+fetch('/predict',{
+method:'POST',
+headers:{'Content-Type':'application/json'},
+body:JSON.stringify({
+age:age.value,
+income:income.value,
+credit:credit.value,
+loan:loan.value
+})
+})
+.then(r=>r.json())
+.then(d=>{
+result.style.display="block"
+
+status.innerText=d.status
+status.className = d.status==="Approved" ? "approved":"rejected"
+
+statement.innerText=d.statement
+
+let percent=parseFloat(d.statement.match(/(\d+\.?\d*)/)[0])
+bar.style.width=percent+"%"
+
+reasons.innerHTML=""
+d.reasons.forEach(x=>reasons.innerHTML+=`<li>${x}</li>`)
+
+suggestions.innerHTML=""
+d.suggestions.forEach(x=>suggestions.innerHTML+=`<li>${x}</li>`)
+})
+}
+</script>
+
+</body>
+</html>
